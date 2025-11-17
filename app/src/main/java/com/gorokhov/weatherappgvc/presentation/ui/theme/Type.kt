@@ -1,4 +1,4 @@
-package com.gorokhov.weatherappgvc.ui.theme
+package com.gorokhov.weatherappgvc.presentation.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
