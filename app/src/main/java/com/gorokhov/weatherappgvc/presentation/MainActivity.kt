@@ -18,7 +18,6 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
 
         val apiService = ApiFactory.apiService
-
         CoroutineScope(Dispatchers.Main).launch {
             val currentWeather = apiService.loadCurrentWeather("London")
             val forecast = apiService.loadForecast("London")

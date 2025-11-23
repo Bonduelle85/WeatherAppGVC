@@ -1,3 +1,5 @@
+import com.android.build.api.variant.BuildConfigField
+
 @Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
     alias(libs.plugins.android.application)
@@ -22,6 +24,14 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+        val weatherApiKey = property("MY_API_KEY")?.toString() ?: error(
+            "You should add apikey into gradle.properties"
+        )
+        buildConfigField(
+            type = "String",
+            name = "WEATHER_API_KEY",
+            value = "\"$weatherApiKey\""
+        )
     }
 
     buildTypes {
@@ -42,6 +52,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
@@ -50,6 +61,18 @@ android {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
+    }
+}
+androidComponents {
+    val weatherApiKey = property("MY_API_KEY")?.toString() ?: error(
+        "You should add apikey into gradle.properties"
+    )
+
+    onVariants { variant ->
+        variant.buildConfigFields?.put(
+            "WEATHER_API_KEY",
+            BuildConfigField("String", "\"$weatherApiKey\"", "API key for accessing the sevice")
+        )
     }
 }
 
