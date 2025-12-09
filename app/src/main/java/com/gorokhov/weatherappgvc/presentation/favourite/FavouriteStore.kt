@@ -11,8 +11,9 @@ import com.gorokhov.weatherappgvc.domain.usecase.GetFavouriteCitiesUseCase
 import com.gorokhov.weatherappgvc.presentation.favourite.FavouriteStore.Intent
 import com.gorokhov.weatherappgvc.presentation.favourite.FavouriteStore.Label
 import com.gorokhov.weatherappgvc.presentation.favourite.FavouriteStore.State
-import jakarta.inject.Inject
+import com.gorokhov.weatherappgvc.presentation.favourite.FavouriteStore.State.CityItem
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 interface FavouriteStore : Store<Intent, State, Label> {
 
@@ -40,12 +41,12 @@ interface FavouriteStore : Store<Intent, State, Label> {
 
             data object Loading : WeatherState
 
-            data object Error : WeatherState
-
             data class Loaded(
                 val tempC: Float,
                 val iconUrl: String
             ) : WeatherState
+
+            data object Error : WeatherState
         }
 
     }
@@ -69,9 +70,7 @@ class FavouriteStoreFactory @Inject constructor(
     fun create(): FavouriteStore = object : FavouriteStore,
         Store<Intent, State, Label> by storeFactory.create(
             name = "FavouriteStore",
-            initialState = State(
-                cityItems = listOf()
-            ),
+            initialState = State(cityItems = listOf()),
             reducer = ReducerImpl,
             executorFactory = ::ExecutorImpl
         ) {}
@@ -169,10 +168,11 @@ class FavouriteStoreFactory @Inject constructor(
     private object ReducerImpl : Reducer<State, Msg> {
 
         override fun State.reduce(msg: Msg): State = when (msg) {
+
             is Msg.FavouriteCitiesLoaded -> {
                 copy(
                     cityItems = msg.cities.map {
-                        State.CityItem(
+                        CityItem(
                             city = it,
                             weatherState = State.WeatherState.Initial
                         )
@@ -184,7 +184,9 @@ class FavouriteStoreFactory @Inject constructor(
                 copy(
                     cityItems = cityItems.map {
                         if (it.city.id == msg.cityId)
-                            it.copy(weatherState = State.WeatherState.Loading)
+                            it.copy(
+                                weatherState = State.WeatherState.Loading
+                            )
                         else
                             it
 
@@ -218,7 +220,6 @@ class FavouriteStoreFactory @Inject constructor(
                             )
                         else
                             it
-
                     }
                 )
             }

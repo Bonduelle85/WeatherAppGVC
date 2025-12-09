@@ -13,6 +13,5 @@ interface PresentationModule {
         @ApplicationScope
         @Provides
         fun provideStoreFactory(): StoreFactory = DefaultStoreFactory()
-
     }
 }
