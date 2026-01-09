@@ -72,7 +72,8 @@ class FavouriteStoreFactory @Inject constructor(
             name = "FavouriteStore",
             initialState = State(cityItems = listOf()),
             reducer = ReducerImpl,
-            executorFactory = ::ExecutorImpl
+            executorFactory = ::ExecutorImpl,
+            bootstrapper = BootstrapperImpl()
         ) {}
 
     private sealed interface Action {
