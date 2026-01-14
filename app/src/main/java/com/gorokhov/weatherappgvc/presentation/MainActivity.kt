@@ -33,7 +33,7 @@ class MainActivity : ComponentActivity() {
 
         super.onCreate(savedInstanceState)
 
-        enableEdgeToEdge()
+        // enableEdgeToEdge()
 
         val component = rootComponentFactory.create(defaultComponentContext())
 
