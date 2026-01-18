@@ -1,6 +1,5 @@
 package com.gorokhov.weatherappgvc.domain.usecase
 
-import com.gorokhov.weatherappgvc.domain.repository.SearchRepository
 import com.gorokhov.weatherappgvc.domain.repository.WeatherRepository
 import javax.inject.Inject
 

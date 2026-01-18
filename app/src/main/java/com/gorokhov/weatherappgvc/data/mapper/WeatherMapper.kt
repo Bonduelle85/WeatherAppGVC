@@ -41,4 +41,4 @@ private fun String.correctImageUrl() = "https:$this".replace(
 
 private fun Long.toMillis() = this * 1000
 
-private const val FIRST_DAY = 1
+private const val FIRST_DAY = 0
