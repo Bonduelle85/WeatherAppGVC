@@ -45,7 +45,7 @@ class DefaultDetailsComponent @AssistedInject constructor(
         store.accept(DetailsStore.Intent.ClickBack)
     }
 
-    override fun onChangeFavouriteStatusClick(cityId: Int) {
+    override fun onChangeFavouriteStatusClick() {
         scope.launch {
             store.accept(DetailsStore.Intent.ClickChangeFavouriteStatus)
         }

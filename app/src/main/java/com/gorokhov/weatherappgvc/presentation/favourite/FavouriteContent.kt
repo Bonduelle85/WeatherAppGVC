@@ -189,6 +189,7 @@ private fun AddFavouriteCityCard(
             Text(
                 text = stringResource(R.string.button_add_favourite),
                 style = MaterialTheme.typography.titleMedium,
+                color = Orange,
                 modifier = Modifier.align(Alignment.CenterHorizontally)
             )
         }

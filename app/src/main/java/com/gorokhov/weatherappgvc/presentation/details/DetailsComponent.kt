@@ -1,6 +1,6 @@
 package com.gorokhov.weatherappgvc.presentation.details
 
-import com.gorokhov.weatherappgvc.domain.entity.City
+
 
 import kotlinx.coroutines.flow.StateFlow
 
@@ -10,5 +10,5 @@ interface DetailsComponent {
 
     fun onBackClick()
 
-    fun onChangeFavouriteStatusClick(cityId: Int)
+    fun onChangeFavouriteStatusClick()
 }
